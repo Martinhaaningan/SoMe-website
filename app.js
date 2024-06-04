@@ -11,6 +11,7 @@ const flash = require('connect-flash'); // Bruges til at vise beskeder til bruge
 const session = require('express-session');
 const passport = require('passport');
 const mongoose = require('mongoose');
+const MongoStore = require('connect-mongo');
 
 //const db = require('./config/keys').mongoURI;
 mongoose.connect('mongodb://localhost/some', {
@@ -40,12 +41,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 /* part II from Traversy Video */
-app.use(session(                        // setup session
-    {
-        secret: '998537qporhgpfangæ143+575?)(%lfjgaæ',  // footprints of the keyboard cat
-        resave: true,
-        saveUninitialized: true
-    }));
+
+
+const session = require("express-session")({
+    secret: '998537qporhgpfangæ143+575?)(%lfjgaæ',
+    resave: true,
+    saveUninitialized: true,
+    store: MongoStore.create({ 
+        mongoUrl: process.env.DB_HOST})
+});
 
 // Passport middleware
 app.use(passport.initialize());         // init passport
