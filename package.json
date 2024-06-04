@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "pretest": "npm i",
-    "test": " node ./bin/www"
+    "pretest": "npm install",
+    "test": "set NODE_ENV=developement&& set DEBUG=somewebsite:*&& node ./bin/www",
+    "start": "set NODE_ENV=production&& node ./bin/www"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
