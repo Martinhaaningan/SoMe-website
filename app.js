@@ -13,8 +13,10 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo');
 
+const server = require('http').Server(app);
+
 //const db = require('./config/keys').mongoURI;
-mongoose.connect('mongodb://localhost/some', {
+mongoose.connect('process.env.DB_HOST', {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true
